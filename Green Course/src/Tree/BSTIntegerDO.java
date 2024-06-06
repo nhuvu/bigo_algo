@@ -34,4 +34,8 @@ public class BSTIntegerDO {
     public int sumValueBST(int x){
         return root.sumValueNode(x);
     }
+
+    public int calculateHeightOfBST(){
+        return this.root.calculateHeight();
+    }
 }

@@ -32,11 +32,11 @@ public class SortDescending {
 
             mergeSort(left, nLeft);
             mergeSort(right, nRight);
-            merge(left, nLeft, right, nRight, a, n);
+            merge(left, nLeft, right, nRight, a);
         }
     }
 
-    public static void merge (int[] Left, int leftLength, int[] Right, int rightLength, int[] arr, int n){
+    public static void merge (int[] Left, int leftLength, int[] Right, int rightLength, int[] arr){
         int i,j,k;
         i = j = k = 0;
         while (i < leftLength && j < rightLength){

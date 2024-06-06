@@ -87,4 +87,18 @@ public class NodeIntegerDO {
         }
         return count;
     }
+    
+    public int calculateHeight(){
+        int leftHeight = 0, rightHeight = 0;
+        if(this == null){
+            return 0;
+        }
+        if(this.left != null){
+            leftHeight = this.left.calculateHeight();
+        }
+        if(this.right != null){
+            rightHeight = this.right.calculateHeight();
+        }
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
 }
