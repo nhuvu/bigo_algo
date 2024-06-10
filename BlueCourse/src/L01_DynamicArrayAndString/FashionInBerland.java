@@ -1,10 +1,9 @@
-package DynamicArrayAndString;
+package L01_DynamicArrayAndString;
 
-import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class L01P01 {
+public class FashionInBerland {
     /**
      * Theo quy tắc về thời trang của đất nước Berland, tất cả nút trên áo đều phải được cài trừ một nút duy nhất không cần phải cài. Tuy nhiên trong trường hợp đặc biệt với chiếc áo chỉ có đúng một nút thì nút đó phải được cài để áo không bị bay.
      * Bạn được cho một chiếc áo với N nút. Xác định xem áo đã được cài đúng hay chưa.
@@ -45,13 +44,13 @@ public class L01P01 {
             for(int i = 0; i < arr.size(); i++){
                 if(arr.get(i) == 0){
                     count++;
+                    if(count > 1){
+                        return false;
+                    }
                 }
             }
-            if (count == 1){
-                return true;
-            } else {
-                return false;
-            }
+
         }
+        return true;
     }
 }

@@ -21,7 +21,7 @@
  * - Print "both" (without the quotes), if you need both data structures to solve the problem.
  * (It's guaranteed that if you can solve the problem only with use of suffix array, then it is impossible to solve it only with use of suffix automaton. This is also true for suffix automaton.)
  * **/
-package DynamicArrayAndString;
+package L01_DynamicArrayAndString;
 
 import java.util.HashMap;
 import java.util.Scanner;
