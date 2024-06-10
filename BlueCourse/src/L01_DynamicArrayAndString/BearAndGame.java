@@ -1,11 +1,10 @@
+/**
+ https://codeforces.com/problemset/problem/673/a
+ * **/
 package L01_DynamicArrayAndString;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-/**
- *
- * **/
 public class BearAndGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

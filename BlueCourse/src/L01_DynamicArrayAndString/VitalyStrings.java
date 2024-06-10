@@ -1,5 +1,7 @@
+/**
+ https://codeforces.com/problemset/problem/518/A
+ * */
 package L01_DynamicArrayAndString;
-
 import java.util.Scanner;
 
 public class VitalyStrings {
@@ -11,27 +13,22 @@ public class VitalyStrings {
     }
 
     public static void middleStringBetween(String a, String b){
-        char[] charsA = a.toCharArray();
-        char[] charsB = b.toCharArray();
-        StringBuilder s = new StringBuilder();
-        for(int i = 0; i < charsA.length; i++){
-            int charOfA = charsA[i];
-            int charOfB = charsB[i];
-            if(charOfA == charOfB){
-                s.append(charsA[i]);
-            }else{
-                if(charOfB - charOfA > 1) {
-                    char c = (char) (charOfA + 1);
-                    s.append(c);
-                }else {
-                    s.append(charsA[i]);
-                }
+        char[] chars = a.toCharArray();
+        for(int i = chars.length - 1; i >= 0; i--){
+            if(chars[i] == 'z'){
+                chars[i] = 'a';
+            }else {
+                int charI = chars[i];
+                charI++;
+                chars[i] = (char) charI;
+                break;
             }
         }
-        if(s.toString().equals(a)){
-            System.out.println("No such string");
+        String middle = String.valueOf(chars);
+        if(!middle.equals(b)){
+            System.out.println(middle);
         }else {
-            System.out.println(s);
+            System.out.println("No such string");
         }
     }
 }

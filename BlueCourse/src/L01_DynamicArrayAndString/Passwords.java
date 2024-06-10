@@ -1,3 +1,6 @@
+/**
+ * https://codeforces.com/problemset/problem/721/B
+ * */
 package L01_DynamicArrayAndString;
 
 import java.util.ArrayList;

@@ -1,22 +1,12 @@
+/**
+ * https://codeforces.com/problemset/problem/691/A
+ * */
 package L01_DynamicArrayAndString;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FashionInBerland {
-    /**
-     * Theo quy tắc về thời trang của đất nước Berland, tất cả nút trên áo đều phải được cài trừ một nút duy nhất không cần phải cài. Tuy nhiên trong trường hợp đặc biệt với chiếc áo chỉ có đúng một nút thì nút đó phải được cài để áo không bị bay.
-     * Bạn được cho một chiếc áo với N nút. Xác định xem áo đã được cài đúng hay chưa.
-     *
-     * Dữ liệu nhập
-     * Dòng đầu tiên chứa một số nguyên
-     * (1≤N≤1000) – số lượng nút trên áo.
-     *
-     Dòng tiếp theo lần lượt chứa N số là đại diện cho nút cài (số 1) hoặc nút không cài (số 0)
-     *
-     * Dữ liệu xuất
-     * In ra YES nếu áo được cài đúng quy tắc, ngược lại in ra NO.
-     * **/
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();

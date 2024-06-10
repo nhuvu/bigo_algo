@@ -1,7 +1,9 @@
+/**
+ * https://codeforces.com/problemset/problem/731/A
+ * */
+
 package L01_DynamicArrayAndString;
-
 import java.util.Scanner;
-
 public class NightAtTheMuseum {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -1,9 +1,11 @@
+/**
+ https://codeforces.com/problemset/problem/691/A
+ * */
 package L01_DynamicArrayAndString;
 
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.function.BinaryOperator;
 
 public class Arrays {
     public static void main(String[] args) {
