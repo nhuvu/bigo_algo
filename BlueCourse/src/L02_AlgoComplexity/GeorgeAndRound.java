@@ -35,6 +35,7 @@ public class GeorgeAndRound {
             if (required[i] < prepared[j]) {
                 if(j > 0 && prepared[j] != prepared[j-1]){
                     extra--;
+                    j++;
                 }
                 i++;
             } else if (required[i] > prepared[j]) {
