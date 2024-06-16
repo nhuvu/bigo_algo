@@ -1,8 +1,11 @@
 /**
  * https://codeforces.com/problemset/problem/602/B
+ * Solution: https://www.dropbox.com/scl/fo/hx9towtlj5lvgcef18tga/AOTo1uVhVS9putPjULgtvrk/Lecture%2002?dl=0&e=1&preview=L02P06+-+Approximating+a+Constant+Range+copy.pdf&rlkey=6z81mwp8xi6dazomk5qbis49c&subfolder_nav_tracking=1
  * */
 package L02_AlgoComplexity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ConstantRange {
@@ -19,26 +22,35 @@ public class ConstantRange {
 
     public static int maxLengthConstantRange (int n, int[] arr){
         int maxLength = 0;
-        int left = 0;
-        for(int right = 0; right < n; right++){
-            int minInRange = arr[left];
-            int maxInRange = arr[left];
-            for (int i = left; i <= right; i++) {
-                minInRange = Math.min(minInRange, arr[i]);
-                maxInRange = Math.max(maxInRange, arr[i]);
-            }
-            if (Math.abs(maxInRange - minInRange) > 1) {
-                // Move right the left pointer if the range is invalid
-                left++;
-                // Update the range values for the new window
-                minInRange = arr[left];
-                maxInRange = arr[left];
-                for (int i = left; i <= right; i++) {
-                    minInRange = Math.min(minInRange, arr[i]);
-                    maxInRange = Math.max(maxInRange, arr[i]);
+        int[] frequencies = new int[100000+2];
+        Arrays.fill(frequencies, 0);// (2≤n≤100 000) — the number of data points => array contains all those numbers as index
+        int countDiff = 0;
+        int right = 0;
+
+        for(int left = 0; left < n - 1; left++){
+            while (right < n && countDiff <=2){
+                //if current sub-array has elements whose value in 2 distinct (countDiff == 2)
+                //and element at 'right' position has frequency = 0
+                //=> element at 'right' position is not eligible to be added to the sub-array, break this loop
+                if(countDiff == 2 && frequencies[arr[right]] == 0){
+                    break;
                 }
+
+                if(frequencies[arr[right]] == 0){
+                    countDiff++;
+                }
+                frequencies[arr[right]]++;
+                right++;
             }
-            maxLength = Math.max(maxLength, right - left + 1);
+            //check length of current sub-array (right - left) after break above loop
+            maxLength = Math.max(maxLength, right - left);
+
+            //'remove' left element (reduce countDiff & frequency of that value) from current sub-array to move forward
+            if(frequencies[arr[left]] == 1){
+                countDiff--;
+            }
+            frequencies[arr[left]]--;
+
         }
         return maxLength;
     }
