@@ -1,6 +1,6 @@
 /**
  * https://www.spoj.com/problems/STPAR/
- * */
+ */
 package L04_StackAndQueue;
 
 import java.util.*;
@@ -8,47 +8,50 @@ import java.util.*;
 public class StreetParade {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        while (true){
+        while (true) {
             Queue<Integer> mobileQueue = new LinkedList<>();
             int num = scanner.nextInt();
-            if(num == 0){
+            if (num == 0) {
                 break;
             }
             scanner.nextLine();
-            for(int i = 0; i < num; i++){
+            for (int i = 0; i < num; i++) {
                 mobileQueue.add(scanner.nextInt());
             }
             scanner.nextLine();
-            canBeSorted(mobileQueue);
+            canBeSorted(num, mobileQueue);
         }
     }
 
-    public static void canBeSorted(Queue<Integer> queue){
-        ArrayList<Integer> sortedList = new ArrayList<>(queue);
-        ArrayList<Integer> currentList = new ArrayList<>();
-        Stack<Integer> mobiles = new Stack<>();
+    public static void canBeSorted(int numberOfMObiles, Queue<Integer> mobileQueue) {
+        ArrayList<Integer> sortedList = new ArrayList<>(mobileQueue);
         Collections.sort(sortedList);
+        ArrayList<Integer> currentList = new ArrayList<>();
+        Stack<Integer> mobileToAlley = new Stack<>();
 
-
-            for(int i = 0; i < sortedList.size(); ){
-                if(queue.peek() != null && queue.peek() > sortedList.get(i)){
-                    mobiles.add(queue.peek());
-                    queue.remove();
-                } else if(queue.peek() != null && queue.peek() == sortedList.get(i)){
-                    currentList.add(queue.peek());
-                    queue.remove();
-                    i++;
-                }
-                if(queue.size() == 0){
-                    break;
-                }
+        while (mobileQueue.peek() != null && 1 != mobileQueue.peek()) {
+            mobileToAlley.add(mobileQueue.remove());
+            if (mobileQueue.peek() != null && 1 == mobileQueue.peek()) {
+                currentList.add(mobileQueue.remove());
+                break;
             }
-
-
-        while (mobiles.size() > 0){
-            currentList.add(mobiles.pop());
         }
-        if(currentList.equals(sortedList)){
+
+        for (int i = 2; i <= numberOfMObiles; ) {
+            while (mobileQueue.peek() != null && i != mobileQueue.peek() && mobileToAlley.peek() != null && i != mobileToAlley.peek()) {
+                mobileToAlley.add(mobileQueue.remove());
+            }
+            if (!mobileQueue.isEmpty() && mobileQueue.peek() != null && i == mobileQueue.peek()) {
+                currentList.add(mobileQueue.remove());
+                i++;
+            }
+            if (!mobileToAlley.isEmpty() && mobileToAlley.peek() != null && i == mobileToAlley.peek()) {
+                currentList.add(mobileToAlley.pop());
+                i++;
+            }
+        }
+
+        if (currentList.equals(sortedList)) {
             System.out.println("yes");
         } else {
             System.out.println("no");
