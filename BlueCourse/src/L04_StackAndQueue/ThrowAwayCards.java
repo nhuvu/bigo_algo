@@ -26,28 +26,25 @@ public class ThrowAwayCards {
 
     public static void printCards (int number){
         Queue<Integer> queue = new LinkedList<>();
-        ArrayList<Integer> removedCards = new ArrayList<>();
+        StringBuilder removedCards = new StringBuilder();
         for(int i = 1; i <= number; i++){
             queue.add(i);
         }
         while (queue.size() > 1){
-            int top = queue.peek();
-            removedCards.add(top);
-            queue.remove();
-            top = queue.peek();
-            queue.remove();
-            queue.add(top);
+            if(removedCards.length() == 0){
+                removedCards.append(queue.poll());
+            } else {
+                removedCards.append(", ").append(queue.poll());
+            }
+            queue.add(queue.poll());
         }
 
         System.out.print("Discarded cards: ");
-        if(removedCards.size() > 0){
-            for(int i = 0; i < removedCards.size() - 1; i++){
-                System.out.printf("%d, ", removedCards.get(i));
-            }
-            System.out.printf("%d", removedCards.getLast());
+        if(removedCards.length() > 0){
+            System.out.print(removedCards);
         }
         System.out.println();
-        System.out.printf("Remaining card: %d", queue.peek());
+        System.out.printf("Remaining card: %d", queue.poll());
         System.out.println();
     }
 }

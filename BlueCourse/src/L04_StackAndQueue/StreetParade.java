@@ -30,7 +30,7 @@ public class StreetParade {
         Stack<Integer> mobileToAlley = new Stack<>();
 
         while (mobileQueue.peek() != null && 1 != mobileQueue.peek()) {
-            mobileToAlley.add(mobileQueue.remove());
+            mobileToAlley.push(mobileQueue.remove());
             if (mobileQueue.peek() != null && 1 == mobileQueue.peek()) {
                 currentList.add(mobileQueue.remove());
                 break;
@@ -38,8 +38,8 @@ public class StreetParade {
         }
 
         for (int i = 2; i <= numberOfMObiles; ) {
-            while (mobileQueue.peek() != null && i != mobileQueue.peek() && mobileToAlley.peek() != null && i != mobileToAlley.peek()) {
-                mobileToAlley.add(mobileQueue.remove());
+            if (!mobileQueue.isEmpty() && i != mobileQueue.peek() && !mobileToAlley.isEmpty() && i != mobileToAlley.peek()) {
+                mobileToAlley.push(mobileQueue.remove());
             }
             if (!mobileQueue.isEmpty() && mobileQueue.peek() != null && i == mobileQueue.peek()) {
                 currentList.add(mobileQueue.remove());
