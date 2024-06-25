@@ -23,14 +23,18 @@ public class CompilerAndParser {
             char[] chars = s.toCharArray();
             int longest = 0;
             Stack<Character> stackChar = new Stack<>();
-            for(char c : chars){
-                if(c == '<'){
-                    stackChar.push(c);
-                }
-                if(c == '>'){
-                    if(!stackChar.isEmpty()){
-                        stackChar.pop();
-                        longest += 2;
+            for(int i = 0; i < chars.length; i++){
+                if(chars[0] == '>'){
+                    break;
+                } else {
+                    if(chars[i] == '<'){
+                        stackChar.push(chars[i]);
+                    }
+                    if(chars[i] == '>'){
+                        if(!stackChar.isEmpty()){
+                            stackChar.pop();
+                            longest += 2;
+                        }
                     }
                 }
             }

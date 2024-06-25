@@ -9,52 +9,49 @@ public class StreetParade {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            Queue<Integer> mobileQueue = new LinkedList<>();
             int num = scanner.nextInt();
             if (num == 0) {
                 break;
             }
             scanner.nextLine();
+            List<Integer> mobileQueue = new ArrayList<>();
             for (int i = 0; i < num; i++) {
                 mobileQueue.add(scanner.nextInt());
             }
+            boolean isSorted = canBeSorted(mobileQueue);
+            if(isSorted){
+                System.out.println("yes");
+            }else {
+                System.out.println("no");
+            }
             scanner.nextLine();
-            canBeSorted(num, mobileQueue);
         }
     }
 
-    public static void canBeSorted(int numberOfMObiles, Queue<Integer> mobileQueue) {
-        ArrayList<Integer> sortedList = new ArrayList<>(mobileQueue);
-        Collections.sort(sortedList);
-        ArrayList<Integer> currentList = new ArrayList<>();
+    public static boolean canBeSorted(List<Integer> mobileQueue) {
         Stack<Integer> mobileToAlley = new Stack<>();
 
-        while (mobileQueue.peek() != null && 1 != mobileQueue.peek()) {
-            mobileToAlley.push(mobileQueue.remove());
-            if (mobileQueue.peek() != null && 1 == mobileQueue.peek()) {
-                currentList.add(mobileQueue.remove());
-                break;
-            }
-        }
-
-        for (int i = 2; i <= numberOfMObiles; ) {
-            if (!mobileQueue.isEmpty() && i != mobileQueue.peek() && !mobileToAlley.isEmpty() && i != mobileToAlley.peek()) {
-                mobileToAlley.push(mobileQueue.remove());
-            }
-            if (!mobileQueue.isEmpty() && mobileQueue.peek() != null && i == mobileQueue.peek()) {
-                currentList.add(mobileQueue.remove());
+        boolean flag = true;
+        int i = 1;
+        while (!mobileQueue.isEmpty() || !mobileToAlley.isEmpty()) {
+            if (!mobileQueue.isEmpty() && mobileQueue.get(0) == i) {
                 i++;
+                mobileQueue.remove(0);
             }
-            if (!mobileToAlley.isEmpty() && mobileToAlley.peek() != null && i == mobileToAlley.peek()) {
-                currentList.add(mobileToAlley.pop());
+            else if (!mobileToAlley.isEmpty() && mobileToAlley.peek() == i) {
                 i++;
+                mobileToAlley.pop();
+            }
+            else {
+                if(!mobileQueue.isEmpty()){
+                    int top = mobileQueue.get(0);
+                    mobileToAlley.push(top);
+                    mobileQueue.remove(0);
+                }else {
+                    flag = false;
+                }
             }
         }
-
-        if (currentList.equals(sortedList)) {
-            System.out.println("yes");
-        } else {
-            System.out.println("no");
-        }
+        return flag;
     }
 }
