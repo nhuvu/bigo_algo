@@ -21,16 +21,18 @@ public class AddAll {
                 for(int i = 0; i < 2; i++){
                     cost += scanner.nextLong();
                 }
-            }
-            for(int i = 0; i < num; i++){
-                heap.add(scanner.nextLong());
+            } else {
+                for(int i = 0; i < num; i++){
+                    long numAdd = scanner.nextLong();
+                    heap.add(numAdd);
+                }
             }
 
+
             while (heap.size() > 1){
-                sum = heap.peek();
-                heap.remove();
-                sum += heap.peek();
-                heap.remove();
+                long peek_1 = heap.poll();
+                long peek_2 = heap.poll();
+                sum = peek_1 + peek_2;
                 cost += sum;
                 heap.add(sum);
             }
