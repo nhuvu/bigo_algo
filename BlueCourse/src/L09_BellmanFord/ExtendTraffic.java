@@ -26,7 +26,7 @@ public class ExtendTraffic {
             scanner.nextLine();
             numPath = scanner.nextInt();
             graph = new Edge[numPath];
-            Arrays.fill(dist, INF);
+
             for (int j = 0; j < numPath; j++) {
                 scanner.nextLine();
                 Node s = new Node();
@@ -48,13 +48,11 @@ public class ExtendTraffic {
             for (int q = 0; q < query; q++) {
                 scanner.nextLine();
                 int destinationNode = scanner.nextInt();
-                boolean flag = bellmanFord(1);
-                if(flag){
-                    if(dist[destinationNode] >= 3){
-                        result[q] = dist[destinationNode];
-                    }else {
-                        result[q] = 0;
-                    }
+                bellmanFord(1);
+                if(dist[destinationNode] < 3 || dist[destinationNode] == INF){
+                    result[q] = 0;
+                }else {
+                    result[q] = dist[destinationNode];
                 }
             }
             System.out.println(String.format("Case %d:", i + 1));
@@ -64,8 +62,9 @@ public class ExtendTraffic {
         }
     }
 
-    public static boolean bellmanFord(int start) {
+    public static void bellmanFord(int start) {
         int u, v, w;
+        Arrays.fill(dist, INF);
         dist[start] = 0;
 
         for (int i = 1; i <= numJunction - 1; i++) {
@@ -78,15 +77,16 @@ public class ExtendTraffic {
                 }
             }
         }
-        //kiem tra chu trinh am - co chu trinh am
-        for (int j = 0; j < numPath; j++) {
-            u = graph[j].source;
-            v = graph[j].destination;
-            w = graph[j].weight;
-            if (dist[u] != INF && dist[u] + w < dist[v]) {
-                return false;
+        //chay lai lan 2
+        for (int i = 1; i <= numJunction - 1; i++) {
+            for (int j = 0; j < numPath; j++) {
+                u = graph[j].source;
+                v = graph[j].destination;
+                w = graph[j].weight;
+                if (dist[u] != INF && dist[u] + w < dist[v]) {
+                    dist[v] = -INF;
+                }
             }
         }
-        return true;
     }
 }

@@ -13,6 +13,6 @@ public class Edge {
     public Edge(Node s, Node d){
         this.source = s.id;
         this.destination = d.id;
-        this.weight = Math.abs(d.getValue(d.id) - s.getValue(s.id));
+        this.weight = (int)Math.pow(d.value - s.value, 3);
     }
 }
